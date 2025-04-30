@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anatomy Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #bodyImage {
+      position: relative;
+      width: 300px;
+    }
+    .hotspot {
+      position: absolute;
+      border: 2px solid rgba(255,0,0,0.5);
+      cursor: pointer;
+    }
+    #quizBox {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Human Body Anatomy Quiz</h1>
+<div id="bodyImage">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Basic_human_body_outline.svg/300px-Basic_human_body_outline.svg.png" alt="Human Body">
+  
+  <!-- Clickable hotspots -->
+  <div class="hotspot" style="top: 80px; left: 130px; width: 40px; height: 40px;" onclick="askQuestion('heart')"></div>
+  <div class="hotspot" style="top: 150px; left: 130px; width: 40px; height: 40px;" onclick="askQuestion('stomach')"></div>
+  <div class="hotspot" style="top: 60px; left: 130px; width: 40px; height: 40px;" onclick="askQuestion('brain')"></div>
+</div>
+
+<div id="quizBox"></div>
+
+<script>
+  const questions = {
+    heart: {
+      question: "What does the heart do?",
+      answer: "pumps blood"
+    },
+    stomach: {
+      question: "What is the stomach responsible for?",
+      answer: "digesting food"
+    },
+    brain: {
+      question: "What does the brain control?",
+      answer: "the body"
+    }
+  };
+
+  let score = 0;
+
+  function askQuestion(part) {
+    const userAnswer = prompt(questions[part].question)?.toLowerCase().trim();
+    const correct = questions[part].answer;
+
+    const feedback = document.createElement('p');
+    if (userAnswer === correct) {
+      score++;
+      feedback.textContent = `✅ Correct! Your score is now ${score}.`;
+    } else {
+      feedback.textContent = `❌ Wrong. The correct answer is: ${correct}.`;
+    }
+
+    document.getElementById('quizBox').appendChild(feedback);
+  }
+</script>
+
+</body>
+</html>
